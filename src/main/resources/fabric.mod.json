@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "frameless",
+  "name": "Frameless",
+  "version": "$version",
+  "description": "Allows for item frames to be made invisible by clicking on them with a glass pane",
+  "license": "Apache-2.0",
+  "depends": {
+    "fabricloader": ">=0.8.8"
+  },
+  "mixins": [
+    "mixins/frameless/mixins.json"
+  ],
+  "authors": [
+    {
+      "name": "Chloe Dawn",
+      "contact": {
+        "email": "chloe@sapphic.dev",
+        "homepage": "https://sapphic.dev"
+      }
+    }
+  ],
+  "contact": {
+    "homepage": "https://git.io/JfhNj",
+    "sources": "https://git.io/JfhNj",
+    "issues": "https://git.io/JfhAe"
+  }
+}
