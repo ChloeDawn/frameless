@@ -42,7 +42,7 @@ abstract class ItemFrameMixin extends AbstractDecorationEntity {
           }
           this.playSound(SoundEvents.ENTITY_ITEM_FRAME_PLACE, 1.0F, 1.0F);
           this.setInvisible(true);
-          cir.setReturnValue(false);
+          cir.setReturnValue(true);
         }
       }
     }
