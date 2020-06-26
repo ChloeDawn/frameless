@@ -3,6 +3,6 @@
   "compatibilityLevel": "JAVA_8",
   "required": true,
   "package": "dev.sapphic.frameless",
-  "client": [ "ItemFrameMixin" ],
+  "mixins": [ "ItemFrameMixin" ],
   "refmap": "mixins/frameless/refmap.json"
 }
