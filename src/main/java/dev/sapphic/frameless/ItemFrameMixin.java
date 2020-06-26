@@ -28,11 +28,11 @@ abstract class ItemFrameMixin extends AbstractDecorationEntity {
     method = "damage",
     at = @At(
       value = "INVOKE",
-      target = "Lnet/minecraft/entity/damage/DamageSource;isExplosive()Z",
+      target = "Lnet/minecraft/entity/decoration/ItemFrameEntity;getHeldItemStack()Lnet/minecraft/item/ItemStack;",
       shift = Shift.BEFORE),
     cancellable = true, require = 1, allow = 1)
   private void tryHide(final DamageSource source, final float amount, final CallbackInfoReturnable<Boolean> cir) {
-    if (!this.isInvisible() && !source.isExplosive() && !this.world.isClient) {
+    if (!this.isInvisible() && !this.world.isClient) {
       final @Nullable Entity attacker = source.getAttacker();
       if (attacker instanceof PlayerEntity) {
         final ItemStack held = ((LivingEntity) attacker).getMainHandStack();
