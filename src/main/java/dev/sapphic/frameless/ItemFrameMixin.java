@@ -28,7 +28,7 @@ abstract class ItemFrameMixin extends HangingEntity {
       shift = Shift.BEFORE, value = "INVOKE", opcode = Opcodes.INVOKEVIRTUAL,
       target = "Lnet/minecraft/world/entity/decoration/ItemFrame;getItem()Lnet/minecraft/world/item/ItemStack;"),
     require = 1, allow = 1, cancellable = true)
-  private void tryHide(final DamageSource source, final float amount, final CallbackInfoReturnable<Boolean> cir) {
+  private void trySetInvisible(final DamageSource source, final float amount, final CallbackInfoReturnable<Boolean> cir) {
     if (!this.level.isClientSide && !this.isInvisible() && source.getEntity() instanceof final Player player) {
       final var stack = player.getMainHandItem();
 
