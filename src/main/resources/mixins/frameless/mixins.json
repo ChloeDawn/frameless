@@ -1,8 +1,10 @@
 {
   "minVersion": "0.8",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "required": true,
   "package": "dev.sapphic.frameless",
-  "mixins": [ "ItemFrameMixin" ],
+  "mixins": [
+    "ItemFrameMixin"
+  ],
   "refmap": "mixins/frameless/refmap.json"
 }
