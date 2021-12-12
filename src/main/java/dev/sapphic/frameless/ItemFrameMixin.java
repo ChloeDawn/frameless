@@ -48,10 +48,10 @@ abstract class ItemFrameMixin extends HangingEntity {
   @Inject(
     method = "dropItem(Lnet/minecraft/world/entity/Entity;Z)V",
     at = @At(
-      shift = Shift.AFTER, value = "INVOKE", opcode = Opcodes.INVOKEVIRTUAL,
+      shift = Shift.AFTER, value = "INVOKE", opcode = Opcodes.INVOKEVIRTUAL, ordinal = 0,
       target = "Lnet/minecraft/world/entity/decoration/ItemFrame;spawnAtLocation"
         + "(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;"),
-    require = 2, allow = 2)
+    require = 1)
   private void tryDropPane(final CallbackInfo callback) {
     if (this.isInvisible()) {
       this.spawnAtLocation(Items.GLASS_PANE);
