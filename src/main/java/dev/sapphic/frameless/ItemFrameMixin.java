@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.HangingEntity;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.objectweb.asm.Opcodes;
@@ -29,8 +30,9 @@ abstract class ItemFrameMixin extends HangingEntity {
       target = "Lnet/minecraft/world/entity/decoration/ItemFrame;getItem()Lnet/minecraft/world/item/ItemStack;"),
     require = 1, allow = 1, cancellable = true)
   private void trySetInvisible(final DamageSource source, final float amount, final CallbackInfoReturnable<Boolean> callback) {
-    if (!this.level.isClientSide && !this.isInvisible() && source.getEntity() instanceof final Player player) {
-      final var stack = player.getMainHandItem();
+    if (!this.level.isClientSide && !this.isInvisible() && source.getEntity() instanceof Player) {
+      final Player player = (Player) source.getEntity();
+      final ItemStack stack = player.getMainHandItem();
 
       if (stack.is(Items.GLASS_PANE)) {
         if (!player.getAbilities().instabuild) {

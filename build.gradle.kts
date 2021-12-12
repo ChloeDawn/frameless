@@ -50,7 +50,7 @@ dependencies {
 tasks {
   compileJava {
     with(options) {
-      release.set(17)
+      release.set(8)
       isFork = true
       isDeprecation = true
       encoding = "UTF-8"
