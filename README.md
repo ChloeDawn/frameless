@@ -1,5 +1,6 @@
 # Frameless
-A Minecraft mod that allows for item frames to be made invisible by clicking on them with a glass pane.
+A mod for Minecraft that allows for item frames to be made invisible by clicking on them with a glass pane.
+
 This mod can be loaded server-side-only (i.e it supports vanilla clients in a dedicated server environment).
 The glass pane is not consumed for creative players, following standard item consumption logic, and will be
 dropped when the item frame is broken.
