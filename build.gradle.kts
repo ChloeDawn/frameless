@@ -39,18 +39,18 @@ repositories {
 }
 
 dependencies {
-  minecraft("com.mojang:minecraft:1.17.1")
+  minecraft("com.mojang:minecraft:1.18.1")
   mappings(loom.officialMojangMappings())
   modImplementation("net.fabricmc:fabric-loader:0.12.11")
   implementation("org.jetbrains:annotations:23.0.0")
   implementation("org.checkerframework:checker-qual:3.20.0")
-  modRuntimeOnly("com.terraformersmc:modmenu:2.0.14")
+  modRuntimeOnly("com.terraformersmc:modmenu:3.0.0")
 }
 
 tasks {
   compileJava {
     with(options) {
-      release.set(16)
+      release.set(17)
       isFork = true
       isDeprecation = true
       encoding = "UTF-8"
