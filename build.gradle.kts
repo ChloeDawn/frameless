@@ -119,6 +119,12 @@ tasks {
   }
 
   assemble {
-    dependsOn(versionFile)
+    dependsOn(versionFile, remapJar, remapSourcesJar)
+
+    doFirst {
+      delete(buildDir.resolve("libs").listFiles { _, name ->
+        name.endsWith("-dev.jar")
+      })
+    }
   }
 }
