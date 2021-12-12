@@ -28,7 +28,7 @@ abstract class ItemFrameMixin extends HangingEntity {
       shift = Shift.BEFORE, value = "INVOKE", opcode = Opcodes.INVOKEVIRTUAL,
       target = "Lnet/minecraft/world/entity/decoration/ItemFrame;getItem()Lnet/minecraft/world/item/ItemStack;"),
     require = 1, allow = 1, cancellable = true)
-  private void trySetInvisible(final DamageSource source, final float amount, final CallbackInfoReturnable<Boolean> cir) {
+  private void trySetInvisible(final DamageSource source, final float amount, final CallbackInfoReturnable<Boolean> callback) {
     if (!this.level.isClientSide && !this.isInvisible() && source.getEntity() instanceof final Player player) {
       final var stack = player.getMainHandItem();
 
@@ -40,7 +40,7 @@ abstract class ItemFrameMixin extends HangingEntity {
         this.playSound(SoundEvents.ITEM_FRAME_PLACE, 1.0F, 1.0F);
         this.setInvisible(true);
 
-        cir.setReturnValue(true);
+        callback.setReturnValue(true);
       }
     }
   }
@@ -52,7 +52,7 @@ abstract class ItemFrameMixin extends HangingEntity {
       target = "Lnet/minecraft/world/entity/decoration/ItemFrame;spawnAtLocation"
         + "(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;"),
     require = 2, allow = 2)
-  private void tryDropPane(final CallbackInfo ci) {
+  private void tryDropPane(final CallbackInfo callback) {
     if (this.isInvisible()) {
       this.spawnAtLocation(Items.GLASS_PANE);
     }
