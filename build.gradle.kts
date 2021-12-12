@@ -1,8 +1,8 @@
 import java.time.Instant
 
 plugins {
-  id("fabric-loom") version "0.8.21"
-  id("net.nemerosa.versioning") version "be24b23"
+  id("fabric-loom") version "0.10.64"
+  id("net.nemerosa.versioning") version "2.15.1"
   id("signing")
 }
 
@@ -14,15 +14,18 @@ java {
 }
 
 loom {
-  refmapName = "mixins/frameless/refmap.json"
+  mixin {
+    defaultRefmapName.set("mixins/frameless/refmap.json")
+  }
+
   runs {
     configureEach {
-      vmArg("-Dmixin.debug=true")
-      vmArg("-Dmixin.debug.export.decompile=false")
-      vmArg("-Dmixin.debug.verbose=true")
-      vmArg("-Dmixin.dumpTargetOnFailure=true")
-      vmArg("-Dmixin.checks=true")
-      vmArg("-Dmixin.hotSwap=true")
+      property("mixin.debug", "true")
+      property("mixin.debug.export.decompile", "false")
+      property("mixin.debug.verbose", "true")
+      property("mixin.dumpTargetOnFailure", "true")
+      property("mixin.checks", "true")
+      property("mixin.hotSwap", "true")
     }
   }
 }
@@ -38,10 +41,10 @@ repositories {
 dependencies {
   minecraft("com.mojang:minecraft:1.17.1")
   mappings(loom.officialMojangMappings())
-  modImplementation("net.fabricmc:fabric-loader:0.11.6")
-  implementation("org.jetbrains:annotations:21.0.1")
-  implementation("org.checkerframework:checker-qual:3.15.0")
-  modRuntime("com.terraformersmc:modmenu:2.0.3")
+  modImplementation("net.fabricmc:fabric-loader:0.12.11")
+  implementation("org.jetbrains:annotations:23.0.0")
+  implementation("org.checkerframework:checker-qual:3.20.0")
+  modRuntimeOnly("com.terraformersmc:modmenu:2.0.3")
 }
 
 tasks {
@@ -88,34 +91,35 @@ tasks {
     )
   }
 
+  if (hasProperty("signing.mods.keyalias")) {
+    val alias = property("signing.mods.keyalias")
+    val keystore = property("signing.mods.keystore")
+    val password = property("signing.mods.password")
+
+    listOf(remapJar, remapSourcesJar).forEach {
+      it.get().doLast {
+        if (!project.file(keystore!!).exists()) {
+          error("Missing keystore $keystore")
+        }
+
+        val file = outputs.files.singleFile
+        ant.invokeMethod(
+          "signjar", mapOf(
+            "jar" to file,
+            "alias" to alias,
+            "storepass" to password,
+            "keystore" to keystore,
+            "verbose" to true,
+            "preservelastmodified" to true
+          )
+        )
+        signing.sign(file)
+      }
+    }
+  }
+
   assemble {
     dependsOn(versionFile)
   }
 }
 
-if (hasProperty("signing.mods.keyalias")) {
-  val alias = property("signing.mods.keyalias")
-  val keystore = property("signing.mods.keystore")
-  val password = property("signing.mods.password")
-
-  listOf(tasks.remapJar, tasks.remapSourcesJar).forEach {
-    it.get().doLast {
-      if (!project.file(keystore!!).exists()) {
-        error("Missing keystore $keystore")
-      }
-
-      val file = outputs.files.singleFile
-      ant.invokeMethod(
-        "signjar", mapOf(
-          "jar" to file,
-          "alias" to alias,
-          "storepass" to password,
-          "keystore" to keystore,
-          "verbose" to true,
-          "preservelastmodified" to true
-        )
-      )
-      signing.sign(file)
-    }
-  }
-}
