@@ -52,7 +52,7 @@ dependencies {
   modImplementation("net.fabricmc:fabric-loader:0.12.12")
   implementation("org.checkerframework:checker-qual:3.20.0")
 
-  modRuntimeOnly("com.terraformersmc:modmenu:3.0.0")
+  modRuntimeOnly("com.terraformersmc:modmenu:3.0.1")
 }
 
 tasks {
