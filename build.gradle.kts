@@ -2,6 +2,7 @@ import java.time.Instant
 
 plugins {
   id("fabric-loom") version "0.10.64"
+  id("io.github.juuxel.loom-quiltflower-mini") version "1.2.1"
   id("net.nemerosa.versioning") version "2.15.1"
   id("signing")
 }
