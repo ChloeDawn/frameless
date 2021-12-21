@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "depends": {
     "fabricloader": ">=0.12.11",
-    "java": ">=16"
+    "java": ">=8"
   },
   "mixins": [
     "mixins/frameless/mixins.json"
