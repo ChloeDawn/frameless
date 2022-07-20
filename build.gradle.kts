@@ -1,9 +1,9 @@
 import java.time.Instant
 
 plugins {
-  id(/*net.fabricmc.*/ "fabric-loom") version "0.12.5"
-  id("io.github.juuxel.loom-quiltflower") version "1.6.1"
-  id("net.nemerosa.versioning") version "2.15.1"
+  id(/*net.fabricmc.*/ "fabric-loom") version "0.12.54"
+  id("io.github.juuxel.loom-quiltflower") version "1.7.3"
+  id("net.nemerosa.versioning") version "3.0.0"
   id("org.gradle.signing")
 }
 
@@ -44,7 +44,7 @@ quiltflower {
 }
 
 dependencies {
-  minecraft("com.mojang:minecraft:1.18.2")
+  minecraft("com.mojang:minecraft:1.19")
 
   mappings(loom.layered {
     officialMojangMappings {
@@ -52,9 +52,8 @@ dependencies {
     }
   })
 
-  modImplementation("net.fabricmc:fabric-loader:0.13.3")
-  implementation("org.checkerframework:checker-qual:3.21.3")
-  testImplementation("com.google.truth:truth:1.1.3")
+  modImplementation("net.fabricmc:fabric-loader:0.14.8")
+  implementation("org.checkerframework:checker-qual:3.22.1")
 }
 
 tasks {
